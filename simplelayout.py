@@ -20,7 +20,7 @@ def main():
     outdir = args['outdir']
     file_name = args['file_name']
     if not os.path.exists(outdir):
-        os.mkdir(outdir)
+        os.makedirs(outdir)
     file_1 = open(outdir + file_name + '.mat', 'w')
     file_1.close()
     file_2 = open(outdir + file_name + '.jpg', 'w')
