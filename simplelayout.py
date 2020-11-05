@@ -1,6 +1,6 @@
 import argparse
 import os
-import numpy as np
+
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--board_grid", type=int, default=100, help="layout pixel")
