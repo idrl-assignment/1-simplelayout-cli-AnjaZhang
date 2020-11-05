@@ -25,13 +25,16 @@ def main():
     unit_grid = args["unit_grid"]
     if board_grid % unit_grid != 0:
         print("board_grid must be devided by unit_grid!")
-        return None
+        exit(0)
     unit_n = args["unit_n"]
     positions = args["positions"]
     if len(positions) != unit_n:
         print("position number isnot equal to unit_n!")
-    if (min(positions) <= 1) or (max(positions) >= (board_grid / unit_grid) ** 2):
-        return None
+        exit(0)
+    if (min(positions) < 1) or (
+        max(positions) > (board_grid / unit_grid) ** 2):
+        print('position must be in [1, (board_grid / unit_grid) ** 2]')
+        exit(0)
     # assert (min(positions) >= 1) and (
     #     max(positions) <= (board_grid / unit_grid) ** 2
     # ), "The positions are out of scope!"
