@@ -23,24 +23,22 @@ def main():
     args = vars(ap.parse_args())
     board_grid = args["board_grid"]
     unit_grid = args["unit_grid"]
-    # 要求`board_grid` 能整除 `unit_grid`
-    assert (
-        board_grid % unit_grid == 0
-    ), "The board_graid cannot be devided by unit_grid!"
+    if board_grid % unit_grid != 0:
+        print("board_grid must be devided by unit_grid!")
+        return None
     unit_n = args["unit_n"]
     positions = args["positions"]
-    # 要求`positions` 数量与 `unit_n` 一致
-    assert len(positions) == unit_n, "The position number must equal to unit_n!"
-    # 要求组件位置为从1开始的整数，上限为 `(board_grid/unit_grid)^2`
-    assert (min(positions) >= 1) and (
-        max(positions) <= (board_grid / unit_grid) ** 2
-    ), "The positions are out of scope!"
+    if len(positions) != unit_n:
+        print("position number isnot equal to unit_n!")
+    if (min(positions) <= 1) or (max(positions) >= (board_grid / unit_grid) ** 2):
+        return None
+    # assert (min(positions) >= 1) and (
+    #     max(positions) <= (board_grid / unit_grid) ** 2
+    # ), "The positions are out of scope!"
     outdir = args["outdir"]
     file_name = args["file_name"]
-    # 判断给定路径是否存在，不存在则创建
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    # 生成文件
     file_1 = open(outdir + file_name + ".mat", "w")
     file_1.close()
     file_2 = open(outdir + file_name + ".jpg", "w")
