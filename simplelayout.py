@@ -8,17 +8,17 @@ def main():
     ap.add_argument("--unit_grid", type=int, help="rectangle pixel")
     ap.add_argument("--unit_n", type=int, help="number of rectangles")
     ap.add_argument(
-        "--positions", nargs="+", type=int, help="the positions of rectangles"
+        "--positions", nargs="+", type=int, help="positions of rectangles"
     )
     ap.add_argument(
         "-o",
         "--outdir",
         type=str,
-        default="example_dir/",
+        default="example_dir1/example_dir2",
         help="rectangle point order number",
     )
     ap.add_argument(
-        "--file_name", type=str, default="example", help="the saved file name"
+        "--file_name", type=str, default="example", help="saved file name"
     )
     args = vars(ap.parse_args())
     board_grid = args["board_grid"]
@@ -31,20 +31,17 @@ def main():
     if len(positions) != unit_n:
         print("position number isnot equal to unit_n!")
         exit(0)
-    if (min(positions) < 1) or (
-        max(positions) > (board_grid / unit_grid) ** 2):
-        print('position must be in [1, (board_grid / unit_grid) ** 2]')
+    upper_bound = (board_grid / unit_grid) ** 2
+    if (min(positions) < 1) or (max(positions) > upper_bound):
+        print("position must be in [1, (board_grid / unit_grid) ** 2]")
         exit(0)
-    # assert (min(positions) >= 1) and (
-    #     max(positions) <= (board_grid / unit_grid) ** 2
-    # ), "The positions are out of scope!"
     outdir = args["outdir"]
     file_name = args["file_name"]
     if not os.path.exists(outdir):
         os.makedirs(outdir)
-    file_1 = open(outdir + file_name + ".mat", "w")
+    file_1 = open(outdir + '/' + file_name + ".mat", "w")
     file_1.close()
-    file_2 = open(outdir + file_name + ".jpg", "w")
+    file_2 = open(outdir + '/' + file_name + ".jpg", "w")
     file_2.close()
     return None
 
